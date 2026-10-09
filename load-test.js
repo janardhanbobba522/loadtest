@@ -10,7 +10,9 @@
  *   REQUEST_TIMEOUT_MS=30000
  *   PICKUP_FROM=2026-09-19T00:00:00
  *   PICKUP_TO=2026-09-26T23:59:59
- *   APP_ID=08c50e21-918e-4298-9f46-7044cecfc6b0
+ *   APP_ID=<app-id>
+ *   API_BASE=https://api.qa.forwardair.com
+ *   ORIGIN=https://premier.qa.forwardair.com
  */
 
 const TOTAL_REQUESTS = Number(process.env.TOTAL_REQUESTS || 1000);
@@ -18,12 +20,15 @@ const CONCURRENCY = Number(process.env.CONCURRENCY || 50);
 const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS || 30000);
 const PICKUP_FROM = process.env.PICKUP_FROM || "2026-09-19T00:00:00";
 const PICKUP_TO = process.env.PICKUP_TO || "2026-09-26T23:59:59";
-const APP_ID =
-  process.env.APP_ID || "08c50e21-918e-4298-9f46-7044cecfc6b0";
+const APP_ID = process.env.APP_ID || "";
 const API_TOKEN = process.env.API_TOKEN || "";
+const API_BASE =
+  process.env.API_BASE || "https://api.qa.forwardair.com";
+const ORIGIN =
+  process.env.ORIGIN || "https://premier.qa.forwardair.com";
 
 const url =
-  "<URL>" +
+  `${API_BASE}/core/api/v1/shipments/v2/search` +
   "?limit=50&offset=0&sort=requestedPickupFromDate:desc" +
   `&requestedPickupFromDate=${encodeURIComponent(PICKUP_FROM)}` +
   `&requestedPickupToDate=${encodeURIComponent(PICKUP_TO)}`;
@@ -35,8 +40,8 @@ const headers = {
   authorization: API_TOKEN,
   "cache-control": "no-cache",
   pragma: "no-cache",
-  origin: "<URL>",
-  Referer: "<URL>/",
+  origin: ORIGIN,
+  Referer: `${ORIGIN}/`,
 };
 
 function isIpv4(value) {
