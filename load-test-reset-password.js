@@ -8,16 +8,17 @@
  *   TOTAL_REQUESTS=100
  *   CONCURRENCY=10
  *   REQUEST_TIMEOUT_MS=30000
- *   EMAIL=jbobba@forwardair.com
+ *   EMAIL=you@example.com
+ *   API_URL=https://api.dev.forwardair.com/core/api/auth/customResetPasswordEmail
  */
 
 const TOTAL_REQUESTS = Number(process.env.TOTAL_REQUESTS || 100);
 const CONCURRENCY = Number(process.env.CONCURRENCY || 10);
 const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS || 30000);
-const EMAIL = process.env.EMAIL || "jbobba@forwardair.com";
-
+const EMAIL = process.env.EMAIL || "";
 const url =
-  "<URL>";
+  process.env.API_URL ||
+  "https://api.dev.forwardair.com/core/api/auth/customResetPasswordEmail";
 
 const headers = {
   "Content-Type": "application/json",
