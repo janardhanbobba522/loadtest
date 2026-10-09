@@ -1,0 +1,14 @@
+{
+  "name": "forwardair-load-testing",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Load testing and Event Hub sample scripts",
+  "scripts": {
+    "eventhub:list": "node event-hub-sample.js list",
+    "eventhub:send": "node event-hub-sample.js send",
+    "eventhub:receive": "node event-hub-sample.js receive"
+  },
+  "dependencies": {
+    "@azure/event-hubs": "^5.12.2"
+  }
+}
